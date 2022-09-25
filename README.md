@@ -38,3 +38,31 @@ The annotations include the following:
 
 
 ## Evaluation Code
+```shell
+python evaluation.py
+```
+
+Download the VISOR annotations [here](https://epic-kitchens.github.io/VISOR/).
+
+Prepare your prediction, the folder structure should look like
+```
+Prediction
+|   WDTCF_preds.json
+|   P01_01_celery_query_pred.png
+|   P01_01_celery_source_pred.png
+|   ...
+|   P37_101_chicken_query_pred.png
+|   P37_101_chicken_source_pred.png
+```
+
+The keys in WDTCF_preds are the same with WDTCF_GT, e.g., P37_101_chicken, and the prediction for each query includes:
+* `query_pred`: prediction of the query object class ID, e.g., 58.
+* `answer_pred`: prediction of the source object class ID, e.g., 13.
+* `evidence_frame_pred`: prediction of the evidence frame, e.g., P37_101_frame_0000000512.jpg.
+
+`PX_X_X_query_pred.png` and `PX_X_X_source_pred.png` are the prediction of query and source masks respectively (resolution: 1080x1920).
+
+
+
+
+

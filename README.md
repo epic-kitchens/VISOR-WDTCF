@@ -1,5 +1,19 @@
 # VISOR WDTCF
 
+## Acknowledgement
+
+When use this repo, any of our models or dataset, you need to cite the VISOR paper
+
+## Citing VISOR
+```
+@inproceedings{VISOR2022,
+  title = {EPIC-KITCHENS VISOR Benchmark: VIdeo Segmentations and Object Relations},
+  author = {Darkhalil, Ahmad and Shan, Dandan and Zhu, Bin and Ma, Jian and Kar, Amlan and Higgins, Richard and Fidler, Sanja and Fouhey, David and Damen, Dima},
+  booktitle = {Proceedings of the Neural Information Processing Systems (NeurIPS) Track on Datasets and Benchmarks},
+  year = {2022}
+}
+```
+
 ## Overview
 *Where Did This Come From (WDTCF)?* is a taster benchmark for long-term perception with scene segmentation. Given a frame from an untrimmed video with a mask indicating a query object, the task aims to trace the mask back through time to identify WDTCF, e.g., milk from the fridge, and a plate from a particular cupboard.
 

@@ -13,7 +13,7 @@ For example, where did this (**onion**) come from?
 Answer: **Cupboard**
 
 ## Statistics
-In total, 224 WDTCF examples are obtained from 92 untrimmed videos in train and val sets of VISOR, with 78 unique query objects. The gap between the query and evidence frames is 5.4 mins (19K frames) on average, but it varies widely with a standard deviation of 8 mins (min=1s, max=52 mins). 
+In total, 222 WDTCF examples are obtained from 92 untrimmed videos in train and val sets of VISOR, with 78 unique query objects. The gap between the query and evidence frames is 5.4 mins (19K frames) on average, but it varies widely with a standard deviation of 8 mins (min=1s, max=52 mins). 
 
 <!-- ![image](https://github.com/AndrewZhuZJU/WDTCF/blob/main/figures/rsz_query_distribution.jpg) -->
 

@@ -9,7 +9,7 @@ def get_parse():
     parser = argparse.ArgumentParser()
     parser.add_argument('--VISOR_anno_path', default='VISOR/', type=str)
     parser.add_argument('--WDTCF_anno_path', default='VISOR/WDTCF_GT.json', type=str)
-    parser.add_argument('--prediction_path', default='preds/', type=str)
+    parser.add_argument('--prediction_path', default='Prediction/', type=str)
     parser.add_argument('--EPIC_100_noun_classes', default='EPIC_100_noun_classes.csv', type=str)
 
     return parser
@@ -62,12 +62,14 @@ def compute_IoU(mask1, mask2):
         return (np.round(iou_score, 3))
 
 def evaluate(WDTCF_anno_path, VISOR_anno_path, prediction_path, key_dict):
-    cnt = 0
     num_correct_query_pred = 0
     num_correct_source_pred = 0
     query_mask_ious = []
     source_mask_ious = []
 
+    if(not os.path.exists(os.path.join(prediction_path, 'WDTCF_preds.json'))):
+        print('WDTCF_preds.json not found!')
+        return
     WDTCF_preds = json.load(open(os.path.join(prediction_path, 'WDTCF_preds.json'), 'r'))
 
     with open (WDTCF_anno_path, 'r') as f:
@@ -98,6 +100,9 @@ def evaluate(WDTCF_anno_path, VISOR_anno_path, prediction_path, key_dict):
             json_load_path = os.path.join(VISOR_anno_path, 'train', video_id+'.json')
             if(not os.path.exists(json_load_path)):
                 json_load_path = os.path.join(VISOR_anno_path, 'val', video_id + '.json')
+                if (not os.path.exists(json_load_path)):
+                    print('{} not found!'.format(json_load_path))
+                    return
 
             with open(json_load_path, 'r') as f:
                 annos = json.load(f)['video_annotations']
@@ -137,8 +142,11 @@ def evaluate(WDTCF_anno_path, VISOR_anno_path, prediction_path, key_dict):
 
                             cv2.fillPoly(query_mask, ps, (1, 1, 1))
 
-                    query_pred_mask = cv2.imread(os.path.join(prediction_path, query+'_query_pred.png'), cv2.IMREAD_UNCHANGED)
+                    if(not os.path.exists(os.path.join(prediction_path, query+'_query_pred.png'))):
+                        print('{} not found!'.format(os.path.join(prediction_path, query+'_query_pred.png')))
+                        return
 
+                    query_pred_mask = cv2.imread(os.path.join(prediction_path, query+'_query_pred.png'), cv2.IMREAD_UNCHANGED).astype(np.uint8)
 
                     # check prediction of evidence
                     if (evidence_frame_pred == evidence_frame):
@@ -148,7 +156,11 @@ def evaluate(WDTCF_anno_path, VISOR_anno_path, prediction_path, key_dict):
                         if (answer_pred_class_id == answer_class_id):
                             num_correct_source_pred += 1
 
-                            source_pred_mask = cv2.imread(os.path.join(prediction_path, query+'_source_pred.png'), cv2.IMREAD_UNCHANGED)
+                            if (not os.path.exists(os.path.join(prediction_path, query + '_source_pred.png'))):
+                                print('{} not found!'.format(os.path.join(prediction_path, query + '_source_pred.png')))
+                                return
+
+                            source_pred_mask = cv2.imread(os.path.join(prediction_path, query+'_source_pred.png'), cv2.IMREAD_UNCHANGED).astype(np.uint8)
                             source_iou = compute_IoU(source_pred_mask, source_mask)
                             source_mask_ious.append(source_iou)
                         else:

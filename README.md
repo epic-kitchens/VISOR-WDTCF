@@ -69,7 +69,7 @@ Prediction
 |   P37_101_chicken_source_pred.png
 ```
 
-The keys in WDTCF_preds are the same with WDTCF_GT, e.g., P37_101_chicken, and the prediction for each query includes:
+In addition to the folder structure above, predictions should be formatted as a single JSON. The keys in `WDTCF_preds.json` are the same with WDTCF_GT, e.g., P37_101_chicken, and the prediction for each query includes:
 * `query_pred`: prediction of the query object class ID, e.g., 58.
 * `answer_pred`: prediction of the source object class ID, e.g., 13.
 * `evidence_frame_pred`: prediction of the evidence frame, e.g., P37_101_frame_0000000512.jpg.
